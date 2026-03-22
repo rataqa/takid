@@ -7,13 +7,20 @@ import { JsonSchemas } from './types';
  * Create an instance of JsonSchemaService per API specification.
  */
 export class JsonSchemaService implements JsonSchemas.IJsonSchemaService {
-  protected ajv = addFormats(new Ajv());
-
+  /**
+   * Cache for validators
+   */
   protected cache: Map<string, JsonSchemas.IJsonSchemaValidator<any>> = new Map();
 
+  /**
+   * Copy of #/components/schemas in OpenAPI spec
+   */
   protected $defs: JsonSchemas.ISchemaContainer = {};
 
-  constructor(public schemasFromSpec: JsonSchemas.ISchemaContainer) {
+  constructor(
+    public schemasFromSpec: JsonSchemas.ISchemaContainer,
+    protected ajv = addFormats(new Ajv()),
+  ) {
     this.$defs = this.makeJsonSchemaDefs(schemasFromSpec);
   }
 

@@ -1,7 +1,7 @@
 import { strictEqual as equal, throws } from 'node:assert';
 import { describe, it } from 'node:test';
 
-import { JsonSchemaService } from '../service';
+import { JsonSchemaService } from '../takid';
 
 describe('takid package - json schema service', () => {
   interface TestSchema {
